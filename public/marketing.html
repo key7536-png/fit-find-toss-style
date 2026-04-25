@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마케팅 정보 수신 동의 | 픽앤픽</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #1a1a2e;
+    --accent: #e94560;
+    --bg: #f8f8fb;
+    --card: #ffffff;
+    --text: #2d2d3a;
+    --muted: #888;
+    --border: #e8e8f0;
+  }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+  header {
+    background: var(--primary);
+    padding: 24px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  header p {
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #ff8a65);
+  }
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .info-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.6;
+    gap: 12px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-label {
+    color: var(--muted);
+    min-width: 90px;
+    font-size: 13px;
+  }
+  .info-value {
+    color: var(--text);
+    flex: 1;
+  }
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .tag {
+    background: #f0f0f8;
+    color: var(--primary);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .notice-box {
+    background: #fff8f8;
+    border: 1px solid #ffd5d5;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .notice-box p {
+    font-size: 13px;
+    color: #c0392b;
+    line-height: 1.7;
+  }
+  .notice-box p + p { margin-top: 6px; }
+  .notice-box p::before { content: '※ '; font-weight: 700; }
+  .footer-text {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    padding: 16px 0;
+  }
+  .badge {
+    display: inline-block;
+    background: #eef2ff;
+    color: #4361ee;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge.optional {
+    background: #f0fdf4;
+    color: #16a34a;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>마케팅 정보 수신 동의</h1>
+  <p>픽앤픽 (Pick&Pick)</p>
+</header>
+<div class="accent-bar"></div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="card-title">수집·이용 목적</div>
+    <div class="info-row">
+      <span class="info-label">목적</span>
+      <span class="info-value">신상품 소개, 이벤트·프로모션 안내, 맞춤형 패션 추천 정보 발송</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">수집 항목</span>
+      <span class="info-value">
+        <div class="tag-list">
+          <span class="tag">이름</span>
+          <span class="tag">앱 푸시 토큰</span>
+          <span class="tag">서비스 이용 기록</span>
+        </div>
+      </span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">보유 기간</span>
+      <span class="info-value">동의 철회 시까지 <span class="badge optional">선택</span></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">발송 채널 및 내용</div>
+    <div class="info-row">
+      <span class="info-label">발송 채널</span>
+      <span class="info-value">앱 푸시 알림, 이메일</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">발송 내용</span>
+      <span class="info-value">
+        신상품 및 트렌드 패션 정보 안내<br>
+        할인 이벤트, 쿠폰 및 프로모션 혜택<br>
+        개인 맞춤형 스타일 추천 알림
+      </span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">발송 빈도</span>
+      <span class="info-value">월 1회 이상, 이벤트 발생 시</span>
+    </div>
+  </div>
+
+  <div class="notice-box">
+    <p>본 동의는 선택사항이며, 동의하지 않아도 픽앤픽 서비스 이용에 제한이 없습니다.</p>
+    <p>수신 동의 후 언제든지 앱 설정 > 알림 설정에서 수신을 거부하실 수 있습니다.</p>
+    <p>광고성 정보 수신을 거부하시는 경우 혜택 정보 안내가 제한될 수 있습니다.</p>
+  </div>
+
+  <div class="footer-text">
+    문의: support@picknpick.kr<br>
+    운영시간: 평일 10:00 ~ 18:00 (주말·공휴일 제외)<br><br>
+    © 2025 픽앤픽 (Pick&Pick). All rights reserved.
+  </div>
+
+</div>
+</body>
+</html>
