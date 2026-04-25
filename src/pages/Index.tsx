@@ -1,8 +1,16 @@
 import { useMemo, useState } from "react";
-import { ChevronRight, Search, Sparkles, ShieldCheck } from "lucide-react";
+import { ChevronRight, Search, Sparkles, ShieldCheck, Flame } from "lucide-react";
 import logo from "@/assets/logo.png";
 import thumbnail from "@/assets/thumbnail-wide.jpg";
-import { partners, categories, type Category } from "@/data/partners";
+import {
+  partners,
+  categories,
+  categoryImages,
+  moodLuxury,
+  moodSneakers,
+  moodCasual,
+  type Category,
+} from "@/data/partners";
 
 const Index = () => {
   const [active, setActive] = useState<Category>("전체");
@@ -15,9 +23,7 @@ const Index = () => {
   const todaysPick = partners.filter((p) => p.badge).slice(0, 3);
 
   const handleGo = (deeplink: string, name: string) => {
-    // 외부 제휴 딥링크 — 토스 미니앱 in-app 브라우저로 자연스럽게 연결
     window.open(deeplink, "_blank", "noopener,noreferrer");
-    // 간단한 클릭 로깅 (확장 시 GA/Toss Analytics 연동 지점)
     if (typeof window !== "undefined") {
       console.info("[picknfit] click", { name, deeplink });
     }
@@ -25,7 +31,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Top Navigation (TDS: 56px height, sticky, 좌측 로고) */}
+      {/* Top Navigation (TDS) */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-screen-md items-center justify-between px-5">
           <a href="/" className="flex items-center gap-2" aria-label="픽앤핏 홈">
@@ -73,8 +79,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Today's Pick */}
-        <section className="mt-8 px-5">
+        {/* Today's Pick — Visual Big Cards */}
+        <section className="mt-9 px-5">
           <div className="mb-3 flex items-end justify-between">
             <h2 className="flex items-center gap-1.5 text-[19px] font-bold tracking-tight">
               <Sparkles className="h-[18px] w-[18px] text-primary" strokeWidth={2.4} />
@@ -82,26 +88,73 @@ const Index = () => {
             </h2>
             <span className="text-[13px] font-medium text-muted-foreground">에디터 추천</span>
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            {todaysPick.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => handleGo(p.deeplink, p.name)}
-                className="group flex flex-col items-start gap-2 rounded-2xl bg-surface p-3 text-left transition-transform active:scale-[0.97]"
-              >
-                <span className="inline-flex h-6 items-center rounded-full bg-primary/10 px-2 text-[11px] font-bold text-primary">
-                  {p.badge}
-                </span>
-                <span className="line-clamp-1 text-[14px] font-semibold">{p.name}</span>
-                <span className="line-clamp-2 text-[12px] text-muted-foreground">{p.tagline}</span>
-              </button>
-            ))}
+          <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {todaysPick.map((p) => {
+              const img = categoryImages[p.category] ?? moodLuxury;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => handleGo(p.deeplink, p.name)}
+                  className="group relative aspect-[3/4] w-[62%] shrink-0 snap-start overflow-hidden rounded-2xl bg-surface text-left transition-transform active:scale-[0.98]"
+                >
+                  <img
+                    src={img}
+                    alt={p.name}
+                    loading="lazy"
+                    width={1024}
+                    height={1280}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute left-3 top-3">
+                    <span className="inline-flex h-6 items-center gap-1 rounded-full bg-primary px-2 text-[11px] font-bold text-primary-foreground">
+                      <Flame className="h-3 w-3" strokeWidth={2.6} />
+                      {p.badge}
+                    </span>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                    <p className="text-[11px] font-medium opacity-80">{p.category}</p>
+                    <p className="mt-0.5 line-clamp-1 text-[16px] font-bold">{p.name}</p>
+                    <p className="line-clamp-1 text-[12.5px] opacity-90">{p.tagline}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
+        </section>
+
+        {/* Featured Collection Banner */}
+        <section className="mt-8 px-5">
+          <button
+            onClick={() => handleGo(partners.find((p) => p.id === "farfetch")!.deeplink, "FARFETCH")}
+            className="group relative block w-full overflow-hidden rounded-2xl text-left"
+          >
+            <img
+              src={moodLuxury}
+              alt="명품 컬렉션"
+              loading="lazy"
+              width={1024}
+              height={1280}
+              className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-y-0 left-0 flex flex-col justify-center p-5 text-white">
+              <span className="text-[11px] font-semibold opacity-80">FEATURED</span>
+              <h3 className="mt-1 text-[20px] font-extrabold leading-tight">
+                글로벌 럭셔리,
+                <br />
+                지금 이 가격
+              </h3>
+              <span className="mt-3 inline-flex w-max items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[12px] font-bold text-foreground">
+                바로 보기 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.6} />
+              </span>
+            </div>
+          </button>
         </section>
 
         {/* Category Tabs */}
         <section className="mt-8">
-          <div className="scrollbar-none flex gap-2 overflow-x-auto px-5">
+          <div className="flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => {
               const isActive = c === active;
               return (
@@ -121,43 +174,78 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Partner List */}
+        {/* Partner Grid — Visual Cards */}
         <section className="mt-5 px-5">
-          <ul className="overflow-hidden rounded-2xl bg-card shadow-[var(--shadow-card)]">
-            {filtered.map((p, i) => (
-              <li key={p.id}>
+          <div className="grid grid-cols-2 gap-3">
+            {filtered.map((p) => {
+              const img = categoryImages[p.category] ?? moodCasual;
+              return (
                 <button
+                  key={p.id}
                   onClick={() => handleGo(p.deeplink, p.name)}
-                  className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition-colors active:bg-secondary"
+                  className="group flex flex-col overflow-hidden rounded-2xl bg-card text-left shadow-[var(--shadow-card)] transition-transform active:scale-[0.98]"
                 >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-surface text-[13px] font-bold text-foreground">
-                      {p.name.replace(/[^A-Za-z가-힣]/g, "").slice(0, 2)}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="truncate text-[15px] font-semibold">{p.name}</span>
-                        {p.badge && (
-                          <span className="rounded-md bg-accent px-1.5 py-0.5 text-[10px] font-bold text-accent-foreground">
-                            {p.badge}
-                          </span>
-                        )}
-                      </div>
-                      <p className="mt-0.5 truncate text-[13px] text-muted-foreground">
-                        {p.tagline} · {p.category}
-                      </p>
-                    </div>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+                    <img
+                      src={img}
+                      alt={p.name}
+                      loading="lazy"
+                      width={1024}
+                      height={768}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {p.badge && (
+                      <span className="absolute left-2 top-2 rounded-md bg-primary px-1.5 py-0.5 text-[10px] font-bold text-primary-foreground">
+                        {p.badge}
+                      </span>
+                    )}
                   </div>
-                  <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={2.2} />
+                  <div className="flex flex-col gap-0.5 p-3">
+                    <span className="text-[11px] font-medium text-muted-foreground">
+                      {p.category}
+                    </span>
+                    <span className="line-clamp-1 text-[14px] font-bold">{p.name}</span>
+                    <span className="line-clamp-1 text-[12px] text-muted-foreground">
+                      {p.tagline}
+                    </span>
+                  </div>
                 </button>
-                {i < filtered.length - 1 && <div className="ml-[68px] h-px bg-border/70" />}
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
         </section>
 
-        {/* 제휴 마케팅 고지 (앱인토스 가이드) */}
+        {/* Sneaker Drop Banner */}
         <section className="mt-8 px-5">
+          <button
+            onClick={() => handleGo(partners.find((p) => p.id === "stockx")!.deeplink, "StockX")}
+            className="group relative block w-full overflow-hidden rounded-2xl text-left"
+          >
+            <img
+              src={moodSneakers}
+              alt="스니커즈 드롭"
+              loading="lazy"
+              width={1024}
+              height={1280}
+              className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/10 to-transparent" />
+            <div className="absolute inset-y-0 right-0 flex flex-col items-end justify-center p-5 text-right text-white">
+              <span className="text-[11px] font-semibold opacity-80">SNEAKER DROP</span>
+              <h3 className="mt-1 text-[20px] font-extrabold leading-tight">
+                한정 발매,
+                <br />
+                놓치지 마세요
+              </h3>
+              <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[12px] font-bold text-foreground">
+                StockX 가기 <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.6} />
+              </span>
+            </div>
+          </button>
+        </section>
+
+        {/* 제휴 마케팅 고지 */}
+        <section className="mt-10 px-5">
           <div className="rounded-2xl border border-border bg-surface p-4">
             <div className="flex items-center gap-1.5 text-[13px] font-bold text-foreground">
               <ShieldCheck className="h-4 w-4 text-primary" strokeWidth={2.4} />

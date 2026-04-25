@@ -1,3 +1,8 @@
+import moodWomen from "@/assets/mood-women.jpg";
+import moodLuxury from "@/assets/mood-luxury.jpg";
+import moodSneakers from "@/assets/mood-sneakers.jpg";
+import moodCasual from "@/assets/mood-casual.jpg";
+
 export type Partner = {
   id: string;
   name: string;
@@ -7,6 +12,16 @@ export type Partner = {
   tagline: string;
   badge?: string;
 };
+
+export const categoryImages: Record<string, string> = {
+  글로벌: moodWomen,
+  명품: moodLuxury,
+  국내: moodWomen,
+  스니커즈: moodSneakers,
+  SPA: moodCasual,
+};
+
+export { moodWomen, moodLuxury, moodSneakers, moodCasual };
 
 export const partners: Partner[] = [
   {
