@@ -1,0 +1,20 @@
+{
+  "name": "픽앤핏",
+  "short_name": "픽앤핏",
+  "description": "국내·해외 패션몰을 한 화면에서 비교하고 바로 이동하는 큐레이션 미니앱",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#3182F6",
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
