@@ -6,39 +6,42 @@
 /* Toss Design System (TDS) inspired tokens — All HSL */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 13% 9%;
+    /* Bright airy base — 살짝 푸른 화이트로 화사함 */
+    --background: 210 40% 99%;
+    --foreground: 220 15% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 13% 9%;
+    --card-foreground: 220 15% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 9%;
+    --popover-foreground: 220 15% 11%;
 
-    /* Toss Blue #3182F6 */
+    /* Toss Blue #3182F6 (유지) */
     --primary: 215 92% 58%;
     --primary-foreground: 0 0% 100%;
     --primary-hover: 215 92% 52%;
 
-    --secondary: 210 17% 96%;
-    --secondary-foreground: 220 13% 9%;
+    /* Sky tinted secondary (화사함 +) */
+    --secondary: 210 60% 96%;
+    --secondary-foreground: 220 15% 11%;
 
-    --muted: 210 17% 96%;
-    --muted-foreground: 215 9% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 12% 45%;
 
-    --accent: 215 100% 96%;
-    --accent-foreground: 215 92% 40%;
+    /* 토스 블루 톤다운 액센트 */
+    --accent: 215 100% 95%;
+    --accent-foreground: 215 92% 42%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 93%;
-    --input: 220 13% 93%;
+    --border: 215 25% 92%;
+    --input: 215 25% 92%;
     --ring: 215 92% 58%;
 
-    /* TDS surfaces */
-    --surface: 210 17% 98%;
-    --surface-strong: 210 17% 94%;
+    /* TDS surfaces — 화사한 sky tint */
+    --surface: 210 60% 97.5%;
+    --surface-strong: 210 50% 93%;
 
     --radius: 14px;
 
