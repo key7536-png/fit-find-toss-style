@@ -23,16 +23,17 @@ const Index = () => {
   const todaysPick = partners.filter((p) => p.badge).slice(0, 3);
 
   const handleGo = (deeplink: string, name: string) => {
-    window.open(deeplink, "_blank", "noopener,noreferrer");
+    // 토스 WebView 권장: 같은 창에서 이동 → 토스 상단 뒤로가기로 복귀 가능
     if (typeof window !== "undefined") {
       console.info("[picknfit] click", { name, deeplink });
     }
+    window.location.href = deeplink;
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background pb-[env(safe-area-inset-bottom)] text-foreground">
       {/* Top Navigation (TDS) */}
-      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 pt-[env(safe-area-inset-top)] backdrop-blur">
         <div className="mx-auto flex h-14 max-w-screen-md items-center justify-between px-5">
           <a href="/" className="flex items-center gap-2" aria-label="픽앤핏 홈">
             <img
